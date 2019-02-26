@@ -23,7 +23,7 @@ class CartController extends Controller
 
 	public function store(Item $item)
 	{
-		$cart = $this->repository->create(['items' => [0 => $item]]);
+		$cart = $this->repository->create($item);
 
 		return new CartResource($cart);
 	}

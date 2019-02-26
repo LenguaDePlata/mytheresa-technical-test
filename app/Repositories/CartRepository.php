@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Cart;
+use App\Models\Item;
 
 class CartRepository implements CartRepositoryInterface
 {
@@ -13,8 +14,12 @@ class CartRepository implements CartRepositoryInterface
         $this->model = $cart;
     }
 
-    public function create(array $data)
+    public function create(Item $item)
     {
-        return $this->model->create($data);
+        $cart = $this->model->create();
+        $cart->items()->attach($item);
+        // $cart->save();
+
+        return $cart;
     }
 }

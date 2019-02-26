@@ -17,7 +17,7 @@ class ItemResource extends JsonResource
     	return [
     		'id' => $this->id,
     		'name' => $this->name,
-    		'price' => $this->price,
+    		'price' => strval($this->price),
     		'quantity' => $this->whenPivotLoaded('carts_items', function() {
     			return $this->pivot->quantity;
     		})
