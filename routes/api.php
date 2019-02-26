@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('carts/{id}', 'CartController@show');
+Route::get('carts/{cart}', 'CartController@show');
 Route::put('carts/item/{item}', 'CartController@store');
 Route::put('carts/{cart}/item/{item}', 'CartController@update');
