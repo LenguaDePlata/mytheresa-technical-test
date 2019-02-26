@@ -8,27 +8,30 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Controllers\CartController;
 use App\Http\Resources\CartResource;
 use App\Repositories\CartRepositoryInterface;
-use App\Models\Cart;
+use App\Models\Item;
 
-class CartControllerShowTest extends TestCase
+class CartControllerStoreTest extends TestCase
 {
     protected $controller;
 
     protected function setUp()
     {
-    	parent::setUp();
+        parent::setUp();
+        $cartMock = $this->getCartMock();
         $repositoryMock = $this->getMockBuilder(CartRepositoryInterface::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
+        $repositoryMock->method('create')
+                        ->willReturn($cartMock);
 
-    	$this->controller = new CartController($repositoryMock);
+        $this->controller = new CartController($repositoryMock);
     }
 
-    public function testCartControllerShowResponseIsResource()
+    public function testCartControllerStoreIsResource()
     {
-    	$cartMock = $this->getCartMock();
+        $mockItem = $this->getItemMock();
 
-    	$this->assertInstanceOf(CartResource::class, $this->controller->show($cartMock));
+        $this->assertInstanceOf(CartResource::class, $this->controller->store($mockItem));
     }
 
     protected function getCartMock()
@@ -36,5 +39,12 @@ class CartControllerShowTest extends TestCase
         $cartMock = $this->getMockBuilder(Cart::class)
                         ->getMock();
         return $cartMock;
+    }
+
+    protected function getItemMock()
+    {
+        $mockItem = $this->getMockBuilder(Item::class)
+                        ->getMock();
+        return $mockItem;
     }
 }
