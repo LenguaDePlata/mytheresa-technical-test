@@ -119,6 +119,32 @@ class UpdateCartRequestTest extends TestCase
                 ]);
     }
 
+    public function testAddingSameItemMultipleTimesToCartResponse()
+    {
+        $fakeItem = factory(Item::class)->create();
+        $fakeCart = $this->getFakeCart();
+        $randomNumber = rand(2, 20);
+
+        for($i = 0; $i < $randomNumber; $i++) {
+            $response = $this->json('PUT', '/api/carts/'.$fakeCart->id.'/item/'.$fakeItem->id);
+        }
+
+        $response->assertStatus(200)
+                ->assertExactJson([
+                    'data' => [
+                        'id' => $fakeCart->id,
+                        'items' => [
+                            [
+                                'id' => $fakeItem->id,
+                                'name' => $fakeItem->name,
+                                'price' => strval($fakeItem->price),
+                                'quantity' => strval($randomNumber)
+                            ]
+                        ]
+                    ]
+                ]);
+    }
+
     protected function getFakeCart(Item $item = null)
     {
         $fakeCart = factory(Cart::class)->create();

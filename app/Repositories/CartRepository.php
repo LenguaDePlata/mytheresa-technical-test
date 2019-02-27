@@ -25,7 +25,13 @@ class CartRepository implements CartRepositoryInterface
 
     public function update(Cart $cart, Item $item)
     {
-        $cart->items()->attach($item);
+        if ($cart->items()->where(['items.id' => $item->id])->exists()) {
+            $existingItem = $cart->items()->where(['items.id' => $item->id])->first();
+            $attributesToUpdate = ['quantity' => ++$existingItem->pivot->quantity];
+            $cart->items()->updateExistingPivot($item->id, $attributesToUpdate);
+        } else {
+            $cart->items()->attach($item);
+        }
 
         return $cart;
     }
