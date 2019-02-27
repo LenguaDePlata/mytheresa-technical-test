@@ -25,6 +25,8 @@ class CartRepository implements CartRepositoryInterface
 
     public function update(Cart $cart, Item $item)
     {
-        return 0;
+        $cart->items()->attach($item);
+
+        return $cart;
     }
 }
