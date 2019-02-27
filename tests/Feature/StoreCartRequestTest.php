@@ -34,6 +34,9 @@ class StoreCartRequestTest extends TestCase
                     'data' => [
                         'items' => $fakeResource->resolve()
                     ]
+                ])
+                ->assertJsonFragment([
+                    'quantity' => "1"
                 ]);
     }
 }

@@ -40,10 +40,7 @@ class GetCartRequestTest extends TestCase
 
     public function testCartWithItemsResponse()
     {
-        $fakeCart = factory(Cart::class)->create();
-        $fakeCart->each(function ($cart) {
-            $cart->items()->save(factory(Item::class)->create());
-        });
+        $fakeCart = $this->getFakeCart();
         $fakeResource = ItemResource::collection($fakeCart->items);
 
         $response = $this->json('GET', '/api/carts/1');
@@ -52,8 +49,17 @@ class GetCartRequestTest extends TestCase
                 ->assertExactJson([
                     'data' => [
                         'id' => $fakeCart->id,
-                        'items' => $fakeResource
+                        'items' => $fakeResource->resolve()
                     ]
                 ]);
+    }
+
+    protected function getFakeCart()
+    {
+        $fakeCart = factory(Cart::class)->create();
+        $fakeCart->each(function ($cart) {
+            $cart->items()->save(factory(Item::class)->create());
+        });
+        return $fakeCart;
     }
 }
