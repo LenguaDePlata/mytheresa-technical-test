@@ -30,6 +30,8 @@ class CartController extends Controller
 
 	public function update(Cart $cart, Item $item)
 	{
-		return 0;
+		$cart = $this->repository->update($cart, $item);
+
+		return new CartResource($cart);
 	}
 }

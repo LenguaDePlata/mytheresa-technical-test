@@ -22,4 +22,9 @@ class CartRepository implements CartRepositoryInterface
 
         return $cart;
     }
+
+    public function update(Cart $cart, Item $item)
+    {
+        return 0;
+    }
 }

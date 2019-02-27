@@ -11,10 +11,8 @@ use App\Repositories\CartRepositoryInterface;
 use App\Models\Item;
 use App\Models\Cart;
 
-class CartControllerStoreTest extends TestCase
+class CartControllerUpdateTest extends TestCase
 {
-    protected $controller;
-
     protected function setUp()
     {
         parent::setUp();
@@ -22,24 +20,17 @@ class CartControllerStoreTest extends TestCase
         $repositoryMock = $this->getMockBuilder(CartRepositoryInterface::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
-        $repositoryMock->method('create')
+        $repositoryMock->method('update')
                         ->willReturn($cartMock);
-
         $this->controller = new CartController($repositoryMock);
     }
 
-    public function testCartControllerStoreResponseIsResource()
+    public function testCartControllerUpdateResponseIsResource()
     {
         $itemMock = $this->getItemMock();
+        $cartMock = $this->getCartMock();
 
-        $this->assertInstanceOf(CartResource::class, $this->controller->store($itemMock));
-    }
-
-    protected function getCartMock()
-    {
-        $cartMock = $this->getMockBuilder(Cart::class)
-                        ->getMock();
-        return $cartMock;
+        $this->assertInstanceOf(CartResource::class, $this->controller->update($cartMock, $itemMock));
     }
 
     protected function getItemMock()
@@ -47,5 +38,12 @@ class CartControllerStoreTest extends TestCase
         $itemMock = $this->getMockBuilder(Item::class)
                         ->getMock();
         return $itemMock;
+    }
+
+    protected function getCartMock()
+    {
+        $cartMock = $this->getMockBuilder(Cart::class)
+                        ->getMock();
+        return $cartMock;
     }
 }
