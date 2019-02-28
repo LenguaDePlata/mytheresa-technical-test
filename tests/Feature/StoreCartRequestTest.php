@@ -27,7 +27,7 @@ class StoreCartRequestTest extends TestCase
         $fakeItem = factory(Item::class)->create();
         $fakeResource = ItemResource::collection(collect([$fakeItem]));
 
-        $response = $this->json('PUT', '/api/carts/item/1');
+        $response = $this->json('PUT', '/api/carts/item/'.$fakeItem->id);
 
         $response->assertStatus(201)
                 ->assertJson([
