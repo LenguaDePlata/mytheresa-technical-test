@@ -43,7 +43,7 @@ class GetCartRequestTest extends TestCase
         $fakeCart = $this->getFakeCart();
         $fakeResource = ItemResource::collection($fakeCart->items);
 
-        $response = $this->json('GET', '/api/carts/1');
+        $response = $this->json('GET', '/api/carts/'.$fakeCart->id);
 
         $response->assertStatus(200)
                 ->assertExactJson([
