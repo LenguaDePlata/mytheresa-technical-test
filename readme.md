@@ -25,3 +25,9 @@ Now you can run the unit and integration tests:
 You can see the endpoints available with
 
     docker exec docker_app_1 php artisan route:list
+
+There are three of them, although they fulfill the role of the two asked for the challenge:
+
+- GET /carts/{cart}: given the id of a cart, returns its id and list of items
+- PUT /carts/item/{item}: given the id of an item, adds it to the cart, when the cart has not yet been created (it's the first item of the cart); thus, it creates the cart, adds the item, and returns the info of the cart
+- PUT /carts/{cart}/item/{item}: given the id of an item and the id of a cart, adds the item to the cart, and returns the updated cart's information
