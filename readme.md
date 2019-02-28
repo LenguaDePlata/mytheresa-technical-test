@@ -21,3 +21,7 @@ Then initialize the Laravel application key and its database from scratch:
 Now you can run the unit and integration tests:
 
     docker exec docker_app_1 vendor/bin/phpunit
+
+You can see the endpoints available with
+
+    docker exec docker_app_1 php artisan route:list
