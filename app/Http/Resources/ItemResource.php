@@ -19,7 +19,7 @@ class ItemResource extends JsonResource
     		'name' => $this->name,
     		'price' => strval($this->price),
     		'quantity' => $this->whenPivotLoaded('carts_items', function() {
-    			return $this->pivot->quantity;
+    			return strval($this->pivot->quantity);
     		})
     	];
     }
