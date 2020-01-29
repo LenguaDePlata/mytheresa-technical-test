@@ -1,3 +1,9 @@
+# About this test and redoing it
+
+After I was told to redo the test, I thought it would be a good idea to build it in another framework, as I've been working with Symfony and DDD for the last two years. However, as I tried to build the application from scratch, I learnt (too late) why I didn't use Symfony in the first place the last time: it lacked simplicity when it is most needed, and it didn't ease things when trying to build  a custom structure based more on DDD and CQRS -it consumed too much time. That, along with some issues with Windows when configuring Docker, made me drop the idea of the Symfony solution. It works better with long-term and wider projects. Laravel was faster and more elegant for something small (you can see the starting point of the Symfony half-baked solution in https://github.com/LenguaDePlata/mytheresa-technical-test-2)
+
+So, after doing some tests and fixing the dockerization in Laravel, I still present this solution to your technical test, even if DDD and CQRS couldn't be added to the mix. It's still the best solution time-, test-, and functionality-wise. My focus from the beginning should have been working over this solution to improve and refactor where it would have been needed.
+
 # How to run the app and its tests
 
 After pulling the code from the repo, set the dotenv environment file from the example one:
